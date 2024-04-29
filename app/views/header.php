@@ -13,6 +13,8 @@
   <link rel="stylesheet" type="./public/template/text/css" href="./template/js/select.dataTables.min.css">
   <link rel="stylesheet" href="./public/template/css/vertical-layout-light/style.css">
   <link rel="shortcut icon" href="./public/template/images/favicon.png" />
+   <!-- Referenciar archivo CSS -->
+   <link rel="stylesheet" href="./public/css/styles.css">
 </head>
 
 <body>

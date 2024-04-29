@@ -41,3 +41,35 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+$(document).ready(function() {
+    // Mostrar el formulario al hacer clic en el botón "Nueva"
+    $('#btnNuevo').click(function() {
+        $('#formNuevaCategoria').show();
+    });
+
+    // Manejar el envío del formulario
+    $('#formNuevaCategoria').submit(function(event) {
+        event.preventDefault(); // Evitar envío por defecto
+
+        // Recolectar los datos del formulario
+        var categoria = $('#categoria').val();
+
+        // Enviar los datos al servidor usando AJAX
+        $.ajax({
+            type: 'POST',
+            url: 'index.php?action=guardar_categoria',
+            data: {
+                categoria: categoria
+            },
+            success: function(response) {
+                // Recargar la página para mostrar la nueva categoría
+                location.reload();
+            },
+            error: function(xhr, status, error) {
+                console.error(error);
+                alert('Ocurrió un error al guardar la categoría');
+            }
+        });
+    });
+});
+

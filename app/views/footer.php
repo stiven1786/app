@@ -27,5 +27,7 @@
     <script src="./public/template/js/dashboard.js"></script>
     <script src="./public/template/js/Chart.roundedBarCharts.js"></script>
     <!-- End custom js for this page-->
+        <!-- Referenciar archivo JavaScript -->
+    <script src="./public/js/scripts.js" defer></script>
     </body>
 </html>

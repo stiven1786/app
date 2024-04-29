@@ -1,5 +1,4 @@
 <?php
-
 class DB {
     public static function getConnection() {
         // Configuración de la base de datos
@@ -15,6 +14,9 @@ class DB {
         if ($conn->connect_error) {
             die("Error de conexión: " . $conn->connect_error);
         }
+
+        // Mensaje de depuración
+        // echo "Conexión a la base de datos establecida correctamente";
 
         return $conn;
     }

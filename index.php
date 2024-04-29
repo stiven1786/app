@@ -1,42 +1,49 @@
+<?php
 // index.php
 
-<?php
-// Cargar la configuración
-require_once 'config.php';
+// Definir la ruta base del proyecto
+define('BASE_PATH', realpath(__DIR__));
+define('BASE_URL', 'http://localhost/app'); // Cambia esto por la URL base de tu aplicación
 
-// Cargar los controladores
-require_once 'controllers/AuthController.php';
-require_once 'controllers/HomeController.php';
+// Incluir el controlador de autenticación
+require_once BASE_PATH . '/app/controllers/AuthController.php';
 
-// Determinar la acción solicitada
+
+// Iniciar la sesión
+session_start();
+
+// Verificar si hay una sesión activa
+if (!empty($_SESSION['user_id'])) {
+    // Si hay una sesión activa y la acción es 'login', redirigir al home
+    if (isset($_GET['action']) && $_GET['action'] === 'login') {
+        header('Location: ' . BASE_URL . '/index.php?action=home');
+        exit;
+    }
+}
+
+
+// Ruta predeterminada
 $action = isset($_GET['action']) ? $_GET['action'] : 'login';
 
-// Enrutamiento basado en la acción
+
+
+// Crear una instancia del controlador de autenticación
+$authController = new AuthController();
+
+// Enrutamiento
 switch ($action) {
     case 'login':
-        $authController = new AuthController();
         $authController->login();
         break;
-    case 'register':
-        $authController = new AuthController();
-        $authController->register();
-        break;
     case 'logout':
-        $authController = new AuthController();
         $authController->logout();
         break;
     case 'home':
-        $homeController = new HomeController();
-        $homeController->index();
-        break;
-    case 'show_users': // Aquí se debe manejar la acción show_users
-        $homeController = new HomeController();
-        $homeController->showUsers();
+        include BASE_PATH . '/app/views/home.php'; // Aquí incluimos el archivo home.php
         break;
     default:
-        // Redirigir a la página de inicio de sesión por defecto
-        header('Location: index.php?action=login');
+        // Si la acción no coincide con ninguna ruta definida, redirigir a la página de inicio de sesión
+        header('Location: ' . BASE_URL . '/index.php?action=login');
         exit;
 }
 ?>
-

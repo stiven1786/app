@@ -1,6 +1,5 @@
 <?php include_once 'header.php'; ?>
 
-<!-- partial -->
 <div class="main-panel">
     <div class="content-wrapper">
         <div class="row">
@@ -15,7 +14,6 @@
             </div>
         </div>
     </div>
-<!-- content-wrapper ends -->
 
 
 
